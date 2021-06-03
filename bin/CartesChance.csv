@@ -1,0 +1,16 @@
+DEPLACEMENT;Rendez-vous à la Rue de la Paix;RUE DE LA PAIX;0
+PAYER;Payez pour frais de scolarité;150;
+DEPLACEMENT;Rendez-vous à l'Avenue Henri-Martin. Si vous passez par la case Départ, recevez 200€;AVENUE HENRI-MARTIN;0
+DEPLACEMENT;Avancez au Boulevard de la Vilette. Si vous passez par la case Départ, recevez 200€;BOULEVARD DE LA VILLETTE;0
+ENCAISSER;Votre immeuble et votre prêt rapportent. Vous devez toucher 150€;150;
+DEPLACEMENT;Reculer de trois cases;;3
+PAYER;Amende pour excès de vitesse : 15€;15;
+LIBERATION;Vous êtes libéré de prison. Cette carte peut être conservée jusqu'à ce qu'elle soit utilisée ou vendue.;;
+DEPLACEMENT;Allez en prison ! Avancez tout droit en prison. Ne passez pas par la case départ. Ne recevez pas 200€;PRISON;0
+ENCAISSER;Vous avez gagné le prix de mots croisés. Recevez 100€.;100;
+FRAIS;Vous êtes imposé pour les réparations de voirie à raison de : 40€ par maison et 115€ par hotel.;40;115
+FRAIS;Faites des réparations dans toutes vos maisons. Versez pour chaque maison 25€. Versez pour chaque hôtel 100€;25;100
+PAYER;Amende pour ivresse : 20€;20;
+ENCAISSER;La bouque vous verse un dividende de 50€;50;
+DEPLACEMENT;Avancez jusqu'à la case départ;CaseDepart;0
+DEPLACEMENT;Allez à la gare de Lyon. Si vous passez par la case Départ, recevez 200€;GARE DE LYON;0

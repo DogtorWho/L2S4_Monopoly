@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox alignment="TOP_CENTER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controller_Accueil">
+   <children>
+      <Label text="Monopoly " textFill="#bc0000">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Label>
+      <HBox>
+         <children>
+            <Label text="Nombre de joueurs : ">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Label>
+            <Slider fx:id="_nbJoueurs" blockIncrement="0.0" focusTraversable="false" majorTickUnit="1.0" max="4.0" min="2.0" minorTickCount="1" showTickLabels="true" value="2.0">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Slider>
+         </children>
+         <VBox.margin>
+            <Insets bottom="15.0" left="10.0" top="15.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox alignment="CENTER">
+         <children>
+            <VBox>
+               <children>
+                  <Label text=" = Joueur 1 :" />
+                  <Label text="Nom :" />
+                  <TextField fx:id="_nom1" focusTraversable="false">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </TextField>
+                  <Label text="Pion :" />
+                  <ChoiceBox fx:id="_pion1" focusTraversable="false" prefWidth="150.0" />
+               </children>
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox>
+               <children>
+                  <Label text=" = Joueur 2 :" />
+                  <Label text="Nom :" />
+                  <TextField fx:id="_nom2" focusTraversable="false" />
+                  <Label text="Pion :" />
+                  <ChoiceBox fx:id="_pion2" focusTraversable="false" prefWidth="150.0" />
+               </children>
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox fx:id="_joueur3" disable="true">
+               <children>
+                  <Label text=" = Joueur 3 :" />
+                  <Label text="Nom :" />
+                  <TextField fx:id="_nom3" focusTraversable="false" />
+                  <Label text="Pion :" />
+                  <ChoiceBox fx:id="_pion3" focusTraversable="false" prefWidth="150.0" />
+               </children>
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox fx:id="_joueur4" disable="true">
+               <children>
+                  <Label text=" = Joueur 4 :" />
+                  <Label text="Nom :" />
+                  <TextField fx:id="_nom4" focusTraversable="false" />
+                  <Label text="Pion :" />
+                  <ChoiceBox fx:id="_pion4" focusTraversable="false" prefWidth="150.0" />
+               </children>
+            </VBox>
+         </children>
+         <VBox.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" />
+         </VBox.margin>
+      </HBox>
+      <Label fx:id="_erreur" textFill="RED" />
+      <Button fx:id="_lancer" mnemonicParsing="false" onAction="#LancerPartie" text="Lancer la partie">
+         <VBox.margin>
+            <Insets bottom="15.0" top="5.0" />
+         </VBox.margin>
+      </Button>
+   </children>
+</VBox>

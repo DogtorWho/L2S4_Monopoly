@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox alignment="CENTER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controller_Plateau">
+   <children>
+      <BorderPane>
+         <right>
+            <VBox BorderPane.alignment="CENTER">
+               <children>
+                  <HBox>
+                     <children>
+                        <Label text="Tour du joueur : " />
+                        <Label fx:id="_joueur" />
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <Separator prefWidth="200.0" />
+                  <Button fx:id="_lancerDes" mnemonicParsing="false" onAction="#LancerDes" text="Lancer les dés">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Button>
+                  <HBox>
+                     <children>
+                        <Label text="Des : ">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="_des" />
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <Button fx:id="_payerPrison" focusTraversable="false" mnemonicParsing="false" onAction="#PayerPourSortirDePrison" text="Payer pour sortir de prison" visible="false">
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="_tenterDouble" focusTraversable="false" mnemonicParsing="false" onAction="#TenterDeFaireUnDouble" text="Tenter de faire un double" visible="false">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Separator prefWidth="200.0" />
+                  <Label text=" == Actions :">
+                     <VBox.margin>
+                        <Insets left="10.0" top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Button fx:id="_acheterTerrain" focusTraversable="false" mnemonicParsing="false" onAction="#AcheterTerrain" text="Acheter le terrain">
+                     <VBox.margin>
+                        <Insets left="10.0" top="5.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="_acheterMaison" focusTraversable="false" mnemonicParsing="false" onAction="#AcheterMaison" text="Acheter une maison">
+                     <VBox.margin>
+                        <Insets left="10.0" top="5.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="_carteSortirPrison" disable="true" mnemonicParsing="false" onAction="#UtiliserCarteSortirPrison" text="Carte Sortir de prison" visible="false">
+                     <VBox.margin>
+                        <Insets left="10.0" top="5.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Separator prefWidth="200.0" />
+                  <Label text=" == Informations :">
+                     <VBox.margin>
+                        <Insets left="10.0" top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label text=" = Joueur :">
+                     <VBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <HBox>
+                     <children>
+                        <Label text="Argent : ">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="_argent" />
+                     </children>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <Label text="Proprietes :">
+                     <VBox.margin>
+                        <Insets left="10.0" top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <ListView fx:id="_listeProprietes" focusTraversable="false" prefHeight="225.0" prefWidth="233.0" />
+                  <Label text=" = Case :">
+                     <VBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <HBox>
+                     <children>
+                        <Label text="Position : ">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="_casePosition" />
+                     </children>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label text="Proprietaire : ">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="_caseProprietaire" />
+                     </children>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label text="Nom : ">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="_caseNom" />
+                     </children>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label text="Prix d'achat : ">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="_casePrix" />
+                     </children>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label text="Maisons : ">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="_nbMaisons" />
+                     </children>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+            </VBox>
+         </right>
+         <top>
+            <Label fx:id="_msgGeneral" text="Debut de la partie" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </BorderPane.margin>
+            </Label>
+         </top>
+         <bottom>
+            <Button fx:id="_finDuTour" mnemonicParsing="false" onAction="#PasserAuJoueurSuivant" text="Fin du tour" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </BorderPane.margin>
+            </Button>
+         </bottom>
+         <left>
+            <Region BorderPane.alignment="CENTER" />
+         </left>
+         <center>
+            <Pane BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fx:id="_plateau" fitHeight="778.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Images/Plateau2.jpg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="_pion1" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="_pion2" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="_pion3" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="_pion4" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+         </center>
+      </BorderPane>
+   </children>
+</HBox>

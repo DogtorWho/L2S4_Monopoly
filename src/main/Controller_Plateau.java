@@ -28,11 +28,11 @@ import partie.exceptions.BankruptException;
 import partie.exceptions.PartieException;
 
 public class Controller_Plateau {
-	
-	private ArrayList<Image> PionsJoueurs = new ArrayList<Image>();	
-	private ArrayList<ImageView> AffichagePions = new ArrayList<ImageView>();	
+
+	private ArrayList<Image> PionsJoueurs = new ArrayList<Image>();
+	private ArrayList<ImageView> AffichagePions = new ArrayList<ImageView>();
 	private Joueur joueurActif;
-	
+
 	@FXML private Label _msgGeneral;
 	@FXML private Label _des;
 	@FXML private Label _joueur;
@@ -57,47 +57,47 @@ public class Controller_Plateau {
 	@FXML private ImageView _pion4;
 
 	public void getListePions(ArrayList<Image> listePions) {
-		PionsJoueurs = listePions;
-		
+		PionsJoueurs = listePions; 
+
 		_pion1.setImage(PionsJoueurs.get(0));
 		AffichagePions.add(_pion1);
-		
+
 		_pion2.setImage(PionsJoueurs.get(1));
 		AffichagePions.add(_pion2);
-		
+
 		if(PionsJoueurs.size() >= 3) {
 			_pion3.setImage(PionsJoueurs.get(2));
 			AffichagePions.add(_pion3);
 		}
-		
+
 		if(PionsJoueurs.size() == 4) {
 			_pion4.setImage(PionsJoueurs.get(3));
 			AffichagePions.add(_pion4);
 		}
-		
-		AfficherInformations();	
+
+		AfficherInformations();
 	}
 
 	@FXML
-	private void initialize() throws IOException {	
-		joueurActif = Plateau.getPlateau().getListeJoueurs().get(Plateau.getPlateau().getIndexJoueurActif());    
+	private void initialize() throws IOException {
+		joueurActif = Plateau.getPlateau().getListeJoueurs().get(Plateau.getPlateau().getIndexJoueurActif());
 
 		_acheterTerrain.setDisable(true);
 		_finDuTour.setDisable(true);
 	}
-	
+
 	private void afficherErreur(String erreur) {
 		Alert alert = new Alert(AlertType.ERROR);
 	    alert.setTitle("Erreur");
 	    String s = erreur;
-	    alert.setContentText(s);  
+	    alert.setContentText(s);
 	    alert.showAndWait();
 	}
-	
+
 	private void afficherVictoire(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/FinDePartie.fxml"));
 		Parent root = loader.load();
-		
+
 		Scene scene = new Scene(root);
 		Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 		stage.setScene(scene);
@@ -106,7 +106,7 @@ public class Controller_Plateau {
 		stage.centerOnScreen();
 		stage.setOnCloseRequest(e -> Platform.exit());
 	}
-	
+
 	private void actionBankrupt(String msg) throws PartieException {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Bankrupt");
@@ -114,17 +114,17 @@ public class Controller_Plateau {
 		String s = msg;
 		alert.setContentText(s);
 		alert.show();
-		
+
 		AfficherInformations();
-		
+
 		// suppression du joueur :
 		int indexjoueur = Plateau.getPlateau().getIndexJoueurActif();
 		PionsJoueurs.remove(indexjoueur);
 		AffichagePions.get(indexjoueur).setImage(null);
 		AffichagePions.remove(indexjoueur);
-		Plateau.getPlateau().getListeJoueurs().remove(indexjoueur);	
+		Plateau.getPlateau().getListeJoueurs().remove(indexjoueur);
 		Plateau.getPlateau().setNbJoueurs(Plateau.getPlateau().getNbJoueurs() - 1);
-		
+
 		_finDuTour.setDisable(false);
 		_lancerDes.setDisable(true);
 		_acheterTerrain.setDisable(true);
@@ -132,7 +132,7 @@ public class Controller_Plateau {
 		_payerPrison.setDisable(true);
 		_tenterDouble.setDisable(true);
 	}
-	
+
 	private void AfficherInformations() {
 		_msgGeneral.setText("Tour de : " + joueurActif.getNom());
 		_joueur.setText(joueurActif.getNom());
@@ -141,11 +141,11 @@ public class Controller_Plateau {
 		for(Object Case : joueurActif.getCasesPossedees()) {
 			_listeProprietes.getItems().add(((Propriete) Case).getNom());
 		}
-		
+
 		AffichagePions.get(Plateau.getPlateau().getIndexJoueurActif()).setX(Plateau.getPlateau().getListeCoordonnees().get(joueurActif.getPosition()).getX());
 		AffichagePions.get(Plateau.getPlateau().getIndexJoueurActif()).setY(Plateau.getPlateau().getListeCoordonnees().get(joueurActif.getPosition()).getY());
-		
-		_msgGeneral.setText("Position : " + joueurActif.getPosition());	
+
+		_msgGeneral.setText("Position : " + joueurActif.getPosition());
 		_casePosition.setText(""+joueurActif.getPosition());
 		if(Plateau.getPlateau().getCase(joueurActif.getPosition()).getProprietaire() != null) {
 			_caseProprietaire.setText(Plateau.getPlateau().getCase(joueurActif.getPosition()).getProprietaire().getNom());
@@ -159,14 +159,14 @@ public class Controller_Plateau {
 			if(Plateau.getPlateau().getCase(joueurActif.getPosition()) instanceof TerrainConstructible) {
 				_nbMaisons.setText(""+((TerrainConstructible) Plateau.getPlateau().getCase(joueurActif.getPosition())).getNombreMaison());
 			}
-		}	
+		}
 		else {
 			_caseNom.setText("");
 			_casePrix.setText("");
 			_nbMaisons.setText("");
 		}
 	}
-	
+
 	private void ActionPrison() throws PartieException {
 		try {
 			_lancerDes.setDisable(true);
@@ -177,17 +177,17 @@ public class Controller_Plateau {
 			_acheterMaison.setDisable(true);
 			_des.setText("");
 			AfficherInformations();
-			_msgGeneral.setText("Tour de : " + joueurActif.getNom() + " [PRISON]");	
-			
+			_msgGeneral.setText("Tour de : " + joueurActif.getNom() + " [PRISON]");
+
 			Plateau.getPlateau().getCase(joueurActif.getPosition()).appliquerEffets(joueurActif);
 		}
-		catch(BankruptException e) {		
+		catch(BankruptException e) {
 			actionBankrupt("La partie est finie pour vous");
-		}		
+		}
 	}
-	
-	@FXML 
-	private void LancerDes(ActionEvent event) throws PartieException {	
+
+	@FXML
+	private void LancerDes(ActionEvent event) throws PartieException {
 		try {
 			Des.getDes().LancerDes();
 			_des.setText(""+Des.getDes().getSomme());
@@ -198,27 +198,27 @@ public class Controller_Plateau {
 				_acheterTerrain.setDisable(true);
 				_acheterMaison.setDisable(true);
 			}
-			
+
 			AfficherInformations();
-				
+
 			if(joueurActif.isCarteSortirPrison()) {
 				_carteSortirPrison.setVisible(true);
 				if(! joueurActif.isPrisonnier()) {
 					_carteSortirPrison.setDisable(true);
-				}		
+				}
 			}
 			if( (Plateau.getPlateau().getCase(joueurActif.getPosition()) instanceof Propriete) && (Plateau.getPlateau().getCase(joueurActif.getPosition()).getProprietaire() == null) ) {
 				_acheterTerrain.setDisable(false);
 			}
-			_lancerDes.setDisable(true);		
-			_finDuTour.setDisable(false);	
+			_lancerDes.setDisable(true);
+			_finDuTour.setDisable(false);
 		}
-		catch(BankruptException e) {	
+		catch(BankruptException e) {
 			actionBankrupt("La partie est finie pour vous");
 		}
 	}
-	
-	@FXML 
+
+	@FXML
 	private void AcheterTerrain(ActionEvent event) throws PartieException {
 		try {
 			if(Plateau.getPlateau().getCase(joueurActif.getPosition()) instanceof Propriete) {
@@ -228,27 +228,27 @@ public class Controller_Plateau {
 			}
 			_acheterTerrain.setDisable(true);
 		}
-		catch(PartieException e) {	
-			String [] msg = e.toString().split(":");	
+		catch(PartieException e) {
+			String [] msg = e.toString().split(":");
 		    afficherErreur(msg[1]);
 		}
-	}	
-	
-	@FXML 
+	}
+
+	@FXML
 	private void AcheterMaison(ActionEvent event) throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("/main/ChoixMaison.fxml"));
-		   
+
 		Scene scene = new Scene(root, 292, 124);
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-		
+
 		Stage stage = new Stage();
 		stage.setScene(scene);
-		stage.setTitle("Choix du terrain pour la maison");	
+		stage.setTitle("Choix du terrain pour la maison");
 		stage.show();
 		stage.centerOnScreen();
-	}	
-	
-	@FXML 
+	}
+
+	@FXML
 	private void UtiliserCarteSortirPrison(ActionEvent event) throws PartieException {
 		try {
 			for(Object Carte : joueurActif.getCartesPossedees()) {
@@ -258,27 +258,27 @@ public class Controller_Plateau {
 				}
 			}
 		}
-		catch(PartieException e) {	
-			String [] msg = e.toString().split(":");	
+		catch(PartieException e) {
+			String [] msg = e.toString().split(":");
 		    afficherErreur(msg[1]);
 		}
 	}
-	
-	@FXML 
+
+	@FXML
 	private void PasserAuJoueurSuivant(ActionEvent event) throws PartieException, IOException {
 		try {
 			if(Plateau.getPlateau().getIndexJoueurActif() >= Plateau.getPlateau().getNbJoueurs()-1) {
-				Plateau.getPlateau().setIndexJoueurActif(0);	
+				Plateau.getPlateau().setIndexJoueurActif(0);
 			}
 			else {
 				Plateau.getPlateau().setIndexJoueurActif(Plateau.getPlateau().getIndexJoueurActif() + 1);
 			}
 			joueurActif = Plateau.getPlateau().getListeJoueurs().get(Plateau.getPlateau().getIndexJoueurActif());
-			
+
 			if(Plateau.getPlateau().getNbJoueurs() == 1) {
 				afficherVictoire(event);
 			}
-				
+
 			AfficherInformations();
 			_lancerDes.setDisable(false);
 			_acheterTerrain.setDisable(true);
@@ -286,47 +286,47 @@ public class Controller_Plateau {
 			_acheterMaison.setDisable(false);
 			_payerPrison.setVisible(false);
 			_tenterDouble.setVisible(false);
-			
+
 			if(joueurActif.isPrisonnier()) {
 				ActionPrison();
 			}
 		}
-		catch(PartieException e) {	
-			String [] msg = e.toString().split(":");	
+		catch(PartieException e) {
+			String [] msg = e.toString().split(":");
 		    afficherErreur(msg[1]);
-		}	
+		}
 	}
 
-	@FXML 
+	@FXML
 	private void PayerPourSortirDePrison(ActionEvent event) throws PartieException {
 		try {
 			joueurActif.PayerPourSortirDePrison();
 			AfficherInformations();
-			
+
 			_payerPrison.setDisable(true);
 			_tenterDouble.setDisable(true);
 			_finDuTour.setDisable(false);
 		}
-		catch(BankruptException e) {	
+		catch(BankruptException e) {
 			actionBankrupt("La partie est finie pour vous");
-		}	
+		}
 	}
-	
-	@FXML 
+
+	@FXML
 	private void TenterDeFaireUnDouble(ActionEvent event) throws PartieException {
 		try {
 			if(joueurActif.TenterDeSortirDePrison()) {
 				AfficherInformations();
-				_des.setText(""+Des.getDes().getSomme());	
+				_des.setText(""+Des.getDes().getSomme());
 			}
-			
+
 			_payerPrison.setDisable(true);
 			_tenterDouble.setDisable(true);
 			_finDuTour.setDisable(false);
 		}
-		catch(BankruptException e) {	
+		catch(BankruptException e) {
 			actionBankrupt("La partie est finie pour vous");
-		}	
+		}
 	}
-	
+
 }

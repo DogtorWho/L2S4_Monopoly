@@ -1,5 +1,6 @@
 package partie;
 
+
 import java.util.ArrayList;
 import cartes.Carte;
 import cases.Case;
@@ -13,7 +14,7 @@ import cases.CaseDepart;
 
 
 public class Joueur {
-	
+
 	private String Nom;
 	private int position;
 	private int Argent;
@@ -38,10 +39,10 @@ public class Joueur {
 		setCasesPossedees(casesPossedees);
 		setCartesPossedees(cartesPossedees);
 	}
-	
+
 
 	// === Fonctions de gestion des deplacements ===
-	
+
 	public void avancer(int nombresCases) throws PartieException {
 		if(nombresCases < 2 || nombresCases > 12) {
 			throw new PartieException("Le déplacement n'est pas possible");
@@ -53,7 +54,7 @@ public class Joueur {
 			}
 			else {
 				caseArrivee = caseArrivee - Plateau.getPlateau().getDerniereCase() - 1; // -1 car la case depart est a 0
-				setPosition(caseArrivee); 
+				setPosition(caseArrivee);
 				if(caseArrivee != 0) { // si on est pas sur la case depart, sinon on double le gain
 					Plateau.getPlateau().getCase(0).appliquerEffets(this);
 				}
@@ -61,7 +62,7 @@ public class Joueur {
 			Plateau.getPlateau().getCase(caseArrivee).appliquerEffets(this);
 		}
 	}
-	
+
 	public void reculer(int nombresCases) throws PartieException {
 		int caseArrivee = getPosition() - nombresCases;
 		if(caseArrivee >= 0) {
@@ -69,11 +70,11 @@ public class Joueur {
 		}
 		else {
 			caseArrivee = Plateau.getPlateau().getDerniereCase() + caseArrivee + 1;
-			setPosition(caseArrivee); 
+			setPosition(caseArrivee);
 		}
 		Plateau.getPlateau().getCase(caseArrivee).appliquerEffets(this);
 	}
-	
+
 	public void teleporter(int caseArrivee, boolean gainCaseDepart) throws PartieException {
 		if(caseArrivee < 0) {
 			throw new IllegalArgumentException("Le numéro de case est négatif");
@@ -84,27 +85,27 @@ public class Joueur {
 		setPosition(caseArrivee);
 		Plateau.getPlateau().getCase(caseArrivee).appliquerEffets(this);
 	}
-	
-	
-	public void PayerPourSortirDePrison() throws PartieException {	
+
+
+	public void PayerPourSortirDePrison() throws PartieException {
 		retirerArgent(50);
 		setPrisonnier(false);
 		teleporter(Plateau.getPlateau().trouverPositionCase("SimpleVisite"), false);
 		setToursEnPrison(0);
 	}
-	
-	public void SortirDePrisonApres3Tours() throws PartieException {	
+
+	public void SortirDePrisonApres3Tours() throws PartieException {
 		setToursEnPrison(getToursEnPrison()+1);
-		
+
 		if(getToursEnPrison() > 3) {
 			//Des.getDes().LancerDes();
 			teleporter(Plateau.getPlateau().trouverPositionCase("SimpleVisite"), false);
 			retirerArgent(50);
-			setPrisonnier(false);	
+			setPrisonnier(false);
 			setToursEnPrison(0);
 		}
 	}
-	
+
 	public boolean TenterDeSortirDePrison() throws PartieException {
 		Des.getDes().LancerDes();
 		if(Des.getDes().isDouble()) {
@@ -116,17 +117,17 @@ public class Joueur {
 		}
 		return false;
 	}
-	
-	
+
+
 	// === Fonctions de gestion de l'argent ===
-	
+
 	public void ajouterArgent(int Argent) {
 		if(Argent < 0) {
 			throw new IllegalArgumentException("L'argent est négatif");
 		}
 		setArgent(getArgent() + Argent);
 	}
-	
+
 	public void retirerArgent(int Argent) throws BankruptException {
 		if(Argent < 0) {
 			throw new IllegalArgumentException("L'argent est négatif");
@@ -139,10 +140,10 @@ public class Joueur {
 			throw new BankruptException(this, "Vous n'avez plus d'argent");
 		}
 	}
-	
-	
+
+
 	// === Fonctions de gestion des cases possedees ===
-	
+
 	public void afficherCasesJoueur() {
 		if(getCasesPossedees() == null) {
 			throw new IllegalArgumentException("La liste de cases possedees est null");
@@ -156,24 +157,24 @@ public class Joueur {
 			}
 		}
 	}
-	
+
 	public void ajouterCase(Case Case) {
 		if(Case == null) {
 			throw new IllegalArgumentException("La case est null");
 		}
 		casesPossedees.add(Case);
 	}
-	
+
 	public void retirerCase(Case Case) {
 		if(Case == null) {
 			throw new IllegalArgumentException("La case est null");
 		}
 		casesPossedees.remove(Case);
 	}
-	
-	
+
+
 	// === Fonctions de gestion des cartes possedees ===
-	
+
 		public void afficherCartesJoueur() {
 			if(getCartesPossedees() == null) {
 				throw new IllegalArgumentException("La liste de cartes possedees est null");
@@ -187,7 +188,7 @@ public class Joueur {
 				}
 			}
 		}
-		
+
 		public void ajouterCarte(Carte carte) {
 			if(carte == null) {
 				throw new IllegalArgumentException("La carte est null");
@@ -197,29 +198,29 @@ public class Joueur {
 			}
 			cartesPossedees.add(carte);
 		}
-		
+
 		public void retirerCarte(Carte carte) {
 			if(carte == null) {
 				throw new IllegalArgumentException("La carte est null");
 			}
 			cartesPossedees.remove(carte);
 		}
-			
+
 		public void utiliserCarte(Carte carte) throws PartieException {
 			if(carte == null) {
 				throw new IllegalArgumentException("La carte est null");
 			}
-			carte.appliquerEffets(this);	
+			carte.appliquerEffets(this);
 			retirerCarte(carte);
 		}
-	
-	
+
+
 	// === Fonctions de gestion des achats ===
-	
+
 	public void acheterPropriete(Propriete propriete) throws PartieException {
 		if(propriete == null) {
 			throw new IllegalArgumentException("La propriete est null");
-		}	
+		}
 		if(propriete.getProprietaire() != null) {
 			throw new PartieException("La propriete est deja possedee");
 		}
@@ -231,23 +232,23 @@ public class Joueur {
 			}
 			else {
 				throw new PartieException("Pas assez d'argent");
-			}	
+			}
 		}
 	}
-	
+
 	public boolean PossedeToutesLesMemesCouleurs(String couleur) {
 		if(couleur == null || couleur.trim().isEmpty()){
 			throw new IllegalArgumentException("Couleur vide ou null");
 		}
 		int total = 0;
-		
+
 		for(Object Case : casesPossedees) {
 			if(Case instanceof TerrainConstructible) {
 				if(((TerrainConstructible) Case).getCouleur().contentEquals(couleur)) {
-					total++;	
+					total++;
 				}
 			}
-		}		
+		}
 		if(couleur.contentEquals("MARRON") || couleur.contentEquals("BLEU FONCE")) {
 			if(total == 2) {
 				return true;
@@ -257,17 +258,17 @@ public class Joueur {
 			if(total == 3) {
 				return true;
 			}
-		}	
+		}
 		return false;
 	}
-	
+
 	private boolean MaisonPoseeValide(String couleur) {
 		if(couleur == null || couleur.trim().isEmpty()){
 			throw new IllegalArgumentException("Couleur vide ou null");
 		}
 		int min = -1;
 		int max = -1;
-		
+
 		for(Object Case : casesPossedees) {
 			if(Case instanceof TerrainConstructible) {
 				if(((TerrainConstructible) Case).getCouleur().contentEquals(couleur)) {
@@ -283,25 +284,25 @@ public class Joueur {
 					}
 				}
 			}
-		}	
+		}
 		if(max - min <= 1) {
 			return true;
 		}
-		
+
 		return false;
 	}
-	
+
 	public void acheterMaison(TerrainConstructible terrain) throws PartieException {
 		if(terrain == null) {
 			throw new IllegalArgumentException("Le terrain est null");
-		}	
+		}
 		if(terrain.getProprietaire() != this) {
 			throw new PartieException("Vous ne possedez pas ce terrain");
 		}
-		
-		if(PossedeToutesLesMemesCouleurs(terrain.getCouleur())) {		
+
+		if(PossedeToutesLesMemesCouleurs(terrain.getCouleur())) {
 			if(terrain.getNombreMaison() < 5) {
-				if(terrain.getPrixMaison() <= getArgent()) {	
+				if(terrain.getPrixMaison() <= getArgent()) {
 					terrain.setNombreMaison(terrain.getNombreMaison() + 1);
 					if(MaisonPoseeValide(terrain.getCouleur())) {
 						retirerArgent(terrain.getPrixMaison());
@@ -309,11 +310,11 @@ public class Joueur {
 					else {
 						terrain.setNombreMaison(terrain.getNombreMaison() - 1);
 						throw new PartieException("Il y'a deja trop de maisons par rapport aux autres terrains " + terrain.getCouleur());
-					}			
+					}
 				}
 				else {
 					throw new PartieException("Pas assez d'argent");
-				}	
+				}
 			}
 			else {
 				throw new PartieException("Le nombre maximum de maisons est deja atteint");
@@ -323,7 +324,7 @@ public class Joueur {
 			throw new PartieException("Vous ne possedez pas tous les terrains " + terrain.getCouleur());
 		}
 	}
-	
+
 	public int NombreDeMaison() {
 		int nombre=0;
 		for(Case proprietes : casesPossedees) {
@@ -333,7 +334,7 @@ public class Joueur {
 		}
 		return nombre;
 	}
-	
+
 	public int NombreHotel() {
 		int nombre=0;
 		for(Case proprietes : casesPossedees) {
@@ -344,10 +345,10 @@ public class Joueur {
 
 	public int nombreDeGaresPossedees() {
 		int total = 0;
-		
+
 		for(Object Case : casesPossedees) {
 			if(Case instanceof Gare) {
-				total++;	
+				total++;
 			}
 		}
 		return total;
@@ -355,7 +356,7 @@ public class Joueur {
 
 	public boolean PossedeToutesLesCompagnies() {
 		int total = 0;
-		
+
 		for(Object Case : casesPossedees) {
 			if(Case instanceof Compagnie) {
 				total++;
@@ -366,15 +367,15 @@ public class Joueur {
 		}
 		return false;
 	}
-	
-	
+
+
 	// === Gestion bankrupt ===
-	
+
 	public void bankrupt() {
 		if( ! isBankrupt()) {
 			setBankrupt(true);
 			setArgent(0);
-			
+
 			for(Carte Carte : getCartesPossedees()) {
 				if(Carte.isPaquetChance()) {
 					Plateau.getPlateau().MettreCarteChanceAuFond(Carte);
@@ -384,7 +385,7 @@ public class Joueur {
 				}
 			}
 			getCartesPossedees().clear();
-			
+
 			for(Case Case : getCasesPossedees()) {
 				Plateau.getPlateau().getCase(Case.getPosition()).setProprietaire(null);
 				if(Case instanceof TerrainConstructible) {
@@ -392,13 +393,13 @@ public class Joueur {
 				}
 			}
 			getCasesPossedees().clear();
-		}	
+		}
 	}
-	
-	
-	
+
+
+
 	// === Getters / Setters ===
-	
+
 	public String getNom() {
 		return Nom;
 	}

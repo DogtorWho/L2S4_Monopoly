@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import cartes.Carte;
+import cases.CaisseCommunaute;
+import cases.Chance;
 import cases.proprietes.Propriete;
 import cases.proprietes.TerrainConstructible;
 import javafx.application.Platform;
@@ -93,6 +95,24 @@ public class Controller_Plateau {
 	    alert.setContentText(s);
 	    alert.showAndWait();
 	}
+	
+	private void afficherCarteChance(String msg) {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Carte chance");
+		alert.setHeaderText("Chance");
+		String s = msg;
+		alert.setContentText(s);	
+		alert.show();
+	}
+	
+	private void afficherCarteCommunaute(String msg) {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Carte communaute");
+		alert.setHeaderText("Caisse de communaute");
+		String s = msg;
+		alert.setContentText(s);
+		alert.show();
+	}
 
 	private void afficherVictoire(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/FinDePartie.fxml"));
@@ -161,9 +181,9 @@ public class Controller_Plateau {
 			}
 		}
 		else {
-			_caseNom.setText("");
-			_casePrix.setText("");
-			_nbMaisons.setText("");
+			_caseNom.setText("---");
+			_casePrix.setText("---");
+			_nbMaisons.setText("---");
 		}
 	}
 
@@ -191,6 +211,17 @@ public class Controller_Plateau {
 		try {
 			Des.getDes().LancerDes();
 			_des.setText(""+Des.getDes().getSomme());
+			
+			int caseArrivee = joueurActif.getPosition() + Des.getDes().getSomme();
+			if(caseArrivee > Plateau.getPlateau().getDerniereCase()) {
+				caseArrivee = caseArrivee - Plateau.getPlateau().getDerniereCase() - 1;
+			}
+			if(Plateau.getPlateau().getCase(caseArrivee) instanceof Chance) {
+				afficherCarteChance(Plateau.getPlateau().getListeCartesChances().get(0).getMessage());
+			}		
+			if(Plateau.getPlateau().getCase(caseArrivee) instanceof CaisseCommunaute) {
+				afficherCarteCommunaute(Plateau.getPlateau().getListeCartesCommunaute().get(0).getMessage());
+			}
 
 			joueurActif.avancer(Des.getDes().getSomme());
 

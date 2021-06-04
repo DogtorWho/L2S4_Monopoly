@@ -46,9 +46,10 @@ public class Controller_ChoixMaison {
 		
 		for(Object Case : joueurActif.getCasesPossedees()) {
 			if(Case instanceof TerrainConstructible) {
-				listeMaisonPossedees.add(((TerrainConstructible) Case).getNom());
+				listeMaisonPossedees.add(((TerrainConstructible)Case).getCouleur() + " | " + ((TerrainConstructible) Case).getNom());
 			}	
 		}
+		listeMaisonPossedees = listeMaisonPossedees.sorted();	
 		_liste.setItems(listeMaisonPossedees);
 	}
 	

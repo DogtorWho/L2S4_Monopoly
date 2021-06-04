@@ -12,25 +12,61 @@ import partie.exceptions.BankruptException;
 import partie.exceptions.PartieException;
 import cases.CaseDepart;
 
-
+/**
+ * La classe Joueur stock toutes les données relatives a un joueur, qui sera ensuite ajouter a la liste des joueurs du plateau
+ * 
+ * @author doctorwho
+ *
+ */
 public class Joueur {
 
+	/**
+	 * String qui stock le noom du joueur
+	 */
 	private String Nom;
+	/**
+	 * entier qui stock la position du joueur sur le plateau
+	 */
 	private int position;
+	/**
+	 * entier qui stock l'argent du joueur
+	 */
 	private int Argent;
-	private int toursEnPrison; // compte le nombre de tours en prison
+	/**
+	 * entier qui stock le nombre de tours en prison
+	 * lorsque le joueur va en prison il devra attendre 3 tours avant de pouvor sortir
+	 */
+	private int toursEnPrison;
+	/**
+	 * boolean qui est vrai quand le joueur est prisonnier
+	 */
 	private boolean Prisonnier;
+	/**
+	 * boolean qui est vrai quand le joueur choisi de payer pour sortir de prison
+	 */
 	private boolean payerPrison;
+	/**
+	 * boolean qui est vrai quand le joueur possede une carte pour sortir de prison
+	 */
 	private boolean carteSortirPrison;
+	/**
+	 * boolean qui est vrai quand le joueur est en bankrupt (perdu la partie)
+	 */
 	private boolean bankrupt;
+	/**
+	 * liste qui stock les cases possedees du joueur
+	 */
 	private ArrayList<Case> casesPossedees = new ArrayList<Case>();
+	/**
+	 * liste qui stock les cartes possedees du joueur
+	 */
 	private ArrayList<Carte> cartesPossedees = new ArrayList<Carte>();
 
 
 	public Joueur(String Nom){
 		setNom(Nom);
 		setPosition(0);
-		setArgent(120);
+		setArgent(1500);
 		setToursEnPrison(0);
 		setPrisonnier(false);
 		setPayerPrison(false);
@@ -42,7 +78,12 @@ public class Joueur {
 
 
 	// === Fonctions de gestion des deplacements ===
-
+	/**
+	 * <p>Methode qui change la position du joueur vers l'avant en fonction du resultat du lancer de Des</p>
+	 * 
+	 * @param nombresCases le nombre de cases a avancer le joueur 
+	 * @throws PartieException si le deplacement n'est pas entre 2 et 12, car on lance 2 dés a 6 faces
+	 */
 	public void avancer(int nombresCases) throws PartieException {
 		if(nombresCases < 2 || nombresCases > 12) {
 			throw new PartieException("Le déplacement n'est pas possible");
@@ -62,7 +103,14 @@ public class Joueur {
 			Plateau.getPlateau().getCase(caseArrivee).appliquerEffets(this);
 		}
 	}
-
+ 
+	/**
+	 * <p>Methode qui change la position du joueur vers l'arriere en fonction de nombreCases</p>
+	 * <p>Utile pour les cartes chance ou communaute qui nous demande de reculer</p>
+	 * 
+	 * @param nombresCases le nombre de cases a reculer le joueur 
+	 * @throws PartieException 
+	 */
 	public void reculer(int nombresCases) throws PartieException {
 		int caseArrivee = getPosition() - nombresCases;
 		if(caseArrivee >= 0) {
@@ -75,6 +123,14 @@ public class Joueur {
 		Plateau.getPlateau().getCase(caseArrivee).appliquerEffets(this);
 	}
 
+	/**
+	 * <p>Methode qui teleporte le joueur a une case donnée, avec possibilité de gagner de l'argent si il passe par la case depart</p>
+	 * <p>Utile pour avancer de moins de 2 cases ou plus de 12 cases</p>
+	 * 
+	 * @param caseArrivee la case ou le joueur sera teleporté
+	 * @param gainCaseDepart vrai si l'on veut que le joueur gagne de l'argent en faisant un tour (utile quand on teleporte le joueur en prison sans qu'il gagne d'argent)
+	 * @throws PartieException
+	 */
 	public void teleporter(int caseArrivee, boolean gainCaseDepart) throws PartieException {
 		if(caseArrivee < 0) {
 			throw new IllegalArgumentException("Le numéro de case est négatif");
@@ -86,7 +142,11 @@ public class Joueur {
 		Plateau.getPlateau().getCase(caseArrivee).appliquerEffets(this);
 	}
 
-
+	/**
+	 * <p>Methode qui deplace le joueur de la prison vers SimpleVisite, en lui retirant de l'argent</p>
+	 * 
+	 * @throws PartieException
+	 */
 	public void PayerPourSortirDePrison() throws PartieException {
 		retirerArgent(50);
 		setPrisonnier(false);
@@ -94,11 +154,16 @@ public class Joueur {
 		setToursEnPrison(0);
 	}
 
+	/**
+	 * <p>Methode qui incremente le nombre de tours en prison du joueur</p>
+	 * <p>Si le joueur est en prison depuis 3 tours il se fait deplacer vers SimpleVisite et on lui retire de l'argent</p>
+	 * 
+	 * @throws PartieException
+	 */
 	public void SortirDePrisonApres3Tours() throws PartieException {
 		setToursEnPrison(getToursEnPrison()+1);
 
 		if(getToursEnPrison() > 3) {
-			//Des.getDes().LancerDes();
 			teleporter(Plateau.getPlateau().trouverPositionCase("SimpleVisite"), false);
 			retirerArgent(50);
 			setPrisonnier(false);
@@ -106,6 +171,12 @@ public class Joueur {
 		}
 	}
 
+	/**
+	 * <p>Methode qui lance les dés, si le joueur fait un double il sort de prison gratuitement</p>
+	 * 
+	 * @return vrai si le joueur a fait un double, et donc est sorti de prison
+	 * @throws PartieException
+	 */
 	public boolean TenterDeSortirDePrison() throws PartieException {
 		Des.getDes().LancerDes();
 		if(Des.getDes().isDouble()) {
@@ -120,7 +191,11 @@ public class Joueur {
 
 
 	// === Fonctions de gestion de l'argent ===
-
+	/**
+	 * <p>Methode qui ajoute de l'argent au joueur</p>
+	 * 
+	 * @param Argent l'argent a ajouter au joueur
+	 */
 	public void ajouterArgent(int Argent) {
 		if(Argent < 0) {
 			throw new IllegalArgumentException("L'argent est négatif");
@@ -128,6 +203,12 @@ public class Joueur {
 		setArgent(getArgent() + Argent);
 	}
 
+	/**
+	 * <p>Methode qui retire de l'argent au joueur</p>
+	 * 
+	 * @param Argent l'argent a retirer au joueur
+	 * @throws BankruptException si le joueur tombe en dessous de 0 argent
+	 */
 	public void retirerArgent(int Argent) throws BankruptException {
 		if(Argent < 0) {
 			throw new IllegalArgumentException("L'argent est négatif");
@@ -143,7 +224,9 @@ public class Joueur {
 
 
 	// === Fonctions de gestion des cases possedees ===
-
+	/**
+	 * <p>Methode qui affiche les cases du joueur dans l'ordre de la liste des cases possedees</p>
+	 */
 	public void afficherCasesJoueur() {
 		if(getCasesPossedees() == null) {
 			throw new IllegalArgumentException("La liste de cases possedees est null");
@@ -157,7 +240,12 @@ public class Joueur {
 			}
 		}
 	}
-
+	
+	/**
+	 * <p>Methode qui ajoute une case a la fin de la liste des cases possedees</p>
+	 * 
+	 * @param Case la case a ajouter
+	 */
 	public void ajouterCase(Case Case) {
 		if(Case == null) {
 			throw new IllegalArgumentException("La case est null");
@@ -165,6 +253,11 @@ public class Joueur {
 		casesPossedees.add(Case);
 	}
 
+	/**
+	 * <p>Methode qui retire une case de la liste des cases possedees</p>
+	 * 
+	 * @param Case la case a retirer
+	 */
 	public void retirerCase(Case Case) {
 		if(Case == null) {
 			throw new IllegalArgumentException("La case est null");
@@ -174,7 +267,9 @@ public class Joueur {
 
 
 	// === Fonctions de gestion des cartes possedees ===
-
+	/**
+	 * <p>Methode qui affiche les cartes du joueur dans l'ordre de la liste des cartes possedees</p>
+	 */
 		public void afficherCartesJoueur() {
 			if(getCartesPossedees() == null) {
 				throw new IllegalArgumentException("La liste de cartes possedees est null");
@@ -189,6 +284,11 @@ public class Joueur {
 			}
 		}
 
+		/**
+		 * <<p>Methode qui ajoute une cartes a la fin de la liste des cartes possedees</p>
+		 * 
+		 * @param carte la carte a ajouter
+		 */
 		public void ajouterCarte(Carte carte) {
 			if(carte == null) {
 				throw new IllegalArgumentException("La carte est null");
@@ -199,6 +299,11 @@ public class Joueur {
 			cartesPossedees.add(carte);
 		}
 
+		/**
+		 * <p>Methode qui retire une carte de la liste des carte possedees</p>
+		 * 
+		 * @param carte la carte a retirer
+		 */
 		public void retirerCarte(Carte carte) {
 			if(carte == null) {
 				throw new IllegalArgumentException("La carte est null");
@@ -206,6 +311,13 @@ public class Joueur {
 			cartesPossedees.remove(carte);
 		}
 
+		/**
+		 * <p>Methode qui utilise une carte de la liste des carte possedees</p>
+		 * <p>Applique l'effet de la carte puis la retire de la liste du joueur</p>
+		 * 
+		 * @param carte la carte a utiliser
+		 * @throws PartieException
+		 */
 		public void utiliserCarte(Carte carte) throws PartieException {
 			if(carte == null) {
 				throw new IllegalArgumentException("La carte est null");
@@ -216,7 +328,12 @@ public class Joueur {
 
 
 	// === Fonctions de gestion des achats ===
-
+		/**
+		 * <p>Methode qui achete une propriete et la stock dans la liste de cases possedees</p>
+		 * 
+		 * @param propriete la propriete a acheter
+		 * @throws PartieException si la propriete est deja possedee ou que le joueur n'a pas assez d'argent
+		 */
 	public void acheterPropriete(Propriete propriete) throws PartieException {
 		if(propriete == null) {
 			throw new IllegalArgumentException("La propriete est null");
@@ -236,6 +353,13 @@ public class Joueur {
 		}
 	}
 
+	/**
+	 * <p>Methode qui permet de savoir si le joueur possede tous les terrains d'une couleur donnée</p>
+	 * <p>Utile lors de l'achat d'une maison, car le joueur doit possedee tous les terrains de la couleur ou la maison sera posée</p>
+	 * 
+	 * @param couleur la couleur des proprietes a chercher
+	 * @return vrai si le joueur possede toutes les cases de la couleur donnée
+	 */
 	public boolean PossedeToutesLesMemesCouleurs(String couleur) {
 		if(couleur == null || couleur.trim().isEmpty()){
 			throw new IllegalArgumentException("Couleur vide ou null");
@@ -262,6 +386,12 @@ public class Joueur {
 		return false;
 	}
 
+	/**
+	 * <p>Methode qui permet de savoir si la maison peut etre posée sur le terrain de la couleur donnée</p>
+	 * 
+	 * @param couleur la couleur des proprietes a chercher
+	 * @return vrai si la maison peut etre posée en fonction du nombre de maisons sur les autres terrains de meme couleur
+	 */
 	private boolean MaisonPoseeValide(String couleur) {
 		if(couleur == null || couleur.trim().isEmpty()){
 			throw new IllegalArgumentException("Couleur vide ou null");
@@ -292,6 +422,13 @@ public class Joueur {
 		return false;
 	}
 
+	/**
+	 * <p>Methode qui achete et pose une maison sur un terrain donné</p>
+	 * 
+	 * @param terrain le terrain ou l'on ajoute une maison
+	 * @throws PartieException si le joueur ne possede pas le terrain, si le nombre de maisons sur les autres terrains est trop grand, 
+	 * si le joueur n'a pas assez d'argent, si il ne peut plus y avoir de maisons, si le joueur n'a pas tous les terrains de la couleur du terrain donné
+	 */
 	public void acheterMaison(TerrainConstructible terrain) throws PartieException {
 		if(terrain == null) {
 			throw new IllegalArgumentException("Le terrain est null");
@@ -325,6 +462,12 @@ public class Joueur {
 		}
 	}
 
+	/**
+	 * <p>Methode qui compte le nombre de maisons sur tous les terrains du joueur</p>
+	 * <p>Utile pour les taxes sur le nombre de maisons d'un joueur</p>
+	 * 
+	 * @return le nombre de maisons total du joueur
+	 */
 	public int NombreDeMaison() {
 		int nombre=0;
 		for(Case proprietes : casesPossedees) {
@@ -335,6 +478,12 @@ public class Joueur {
 		return nombre;
 	}
 
+	/**
+	 * <p>Methode qui compte le nombre d'hotels sur tous les terrains du joueur</p>
+	 * <p>Utile pour les taxes sur le nombre d'hotels d'un joueur</p>
+	 * 
+	 * @return le nombre d'hotels total du joueur
+	 */
 	public int NombreHotel() {
 		int nombre=0;
 		for(Case proprietes : casesPossedees) {
@@ -343,6 +492,12 @@ public class Joueur {
 		return nombre;
 	}
 
+	/**
+	 * <p>Methode qui compte le nombre de gares du joueur</p>
+	 * <p>Utile pour le loyer qui est calculé en fonction du nombre de gares</p>
+	 * 
+	 * @return le nombre de gares total du joueur
+	 */
 	public int nombreDeGaresPossedees() {
 		int total = 0;
 
@@ -354,6 +509,12 @@ public class Joueur {
 		return total;
 	}
 
+	/**
+	 * <p>Methode qui compte le nombre de compagnies du joueur</p>
+	 * <p>Utile pour le loyer qui est calculé en fonction du nombre de compagnies</p>
+	 * 
+	 * @return vrai si le joueur a toutes les compagnies
+	 */
 	public boolean PossedeToutesLesCompagnies() {
 		int total = 0;
 
@@ -370,7 +531,10 @@ public class Joueur {
 
 
 	// === Gestion bankrupt ===
-
+	/**
+	 * <p>Methode qui est lancée lors d'une BankruptException</p>
+	 * <p>Elle retire le joueur de la partie en redistribuant ses cases et cartes</p>
+	 */
 	public void bankrupt() {
 		if( ! isBankrupt()) {
 			setBankrupt(true);

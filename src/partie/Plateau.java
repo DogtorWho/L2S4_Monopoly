@@ -34,30 +34,90 @@ import partie.parser.parserCases.ParserSimpleVisite;
 import partie.parser.parserCases.ParserTaxeDeLuxe;
 import partie.parser.parserCases.ParserTerrainConstructible;
 
+/**
+ * La classe Plateau gère le plateau du Monopoly : cases, cartes chances et communaute, joueurs,...
+ * On utilise un type Singleton pour avoir access aux plateau dans toutes les autres classes
+ * 
+ * @author doctorwho
+ *
+ */
 public class Plateau {
 	
-	private static Plateau instance = null;
-	
+	/**
+	 * instance du Singleton Plateau
+	 */
+	private static Plateau instance = null;	
+	/**
+	 * entier qui stock le nombre de joueurs encore en vie sur le plateau
+	 */
 	private int nbJoueurs = 0;
+	/**
+	 * entier qui stock la position du joueur actif dans la liste de joueurs
+	 */
 	private int indexJoueurActif = 0;
+	/**
+	 * entier qui stock la position de la derniere case du plateau
+	 */
+	private int DerniereCase;
 	
+	// ===== Fichiers =====
+	/**
+	 * String qui stock le chemin du fichier contenant les cases du plateau a parser
+	 */
 	private static String nomDuFichierPlateau = "Data/Terrains.csv";
+	/**
+	 * String qui stock le chemin du fichier contenant les cartes chances a parser
+	 */
 	private static String nomDuFichierCartesChances = "Data/CartesChance.csv";
+	/**
+	 * String qui stock le chemin du fichier contenant les cartes communaute a parser
+	 */
 	private static String nomDuFichierCartesCommunaute = "Data/CartesCommunaute.csv";
+	/**
+	 * String qui stock le chemin du fichier contenant les coordonnees des cases du plateau a parser
+	 */
 	private static String nomDuFichierCoordonnees = "Data/CoordonneesCases.csv";
 	
+	// ===== Parsers =====
+	/**
+	 * Parser du fichier contenant les cases du plateau
+	 */
 	private Parser premierParserPlateau = null;
+	/**
+	 * Parser du fichier contenant les cartes chances
+	 */
 	private Parser premierParserCartesChances = null;
+	/**
+	 * Parser du fichier contenant les cartes communaute
+	 */
 	private Parser premierParserCartesCommunaute = null;
+	/**
+	 * Parser du fichier contenant les coordonnees des cases du plateau
+	 */
 	private Parser premierParserCoordonnees = null;
 	
+	// ===== Listes =====
+	/**
+	 * liste qui stock les joueurs encore en vie sur le plateau
+	 */
 	private List<Joueur> listeJoueurs = new ArrayList<Joueur>();
+	/**
+	 * liste qui stock les cases du plateau
+	 */
 	private List<Case> listeCases = new ArrayList<Case>();
+	/**
+	 * liste qui stock les cartes chance
+	 */
 	private List<Carte> listeCartesChances = new ArrayList<Carte>();
+	/**
+	 * liste qui stock les caretes communaute
+	 */
 	private List<Carte> listeCartesCommunaute = new ArrayList<Carte>();
+	/**
+	 * liste qui stock les coordonnees des cases du plateau
+	 */
 	private List<Coordonnees> listeCoordonnees = new ArrayList<Coordonnees>();
 	
-	private int DerniereCase;
 	
 		
 	private Plateau(){		
@@ -97,6 +157,11 @@ public class Plateau {
 	
 	
 	// === Fonctions de gestion du plateau ===
+	/**
+	 * <p>Methode qui sert a recuperer l'instance du Singleton Plateau dans les autres classes</p>
+	 * 
+	 * @return l'instance de Plateau
+	 */
 	public static Plateau getPlateau() {
 		if(instance == null) {
 			instance = new Plateau();
@@ -104,6 +169,10 @@ public class Plateau {
 		return instance;
 	}
 			
+	/**
+	 * <p>Methode qui initialise les cases du plateau en appelant le parseur du fichier les contenant</p>
+	 * <p>Appel aussi les methodes d'inititialisation des cartes chance, communaute et des coordonnees</p>
+	 */
 	public void initialiserPlateau() {
 		try {
 			listeCases.clear();
@@ -122,6 +191,9 @@ public class Plateau {
 		}
 	}
 	
+	/**
+	 * <p>Methode qui affiche les cases du plateau dans l'ordre de la liste de cases</p>
+	 */
 	public void afficherPlateau() {	
 		if(getListeCases() == null) {
 			throw new IllegalArgumentException("La liste est null");
@@ -134,7 +206,11 @@ public class Plateau {
 	
 	
 	// === Fonctions de gestion des cases ===
-	
+	/**
+	 * <p>Methode qui ajoute une case a la fin de la liste de cases</p>
+	 * 
+	 * @param Case la case a ajouter
+	 */
 	public void ajouterCase(Case Case) {	
 		if(getListeCases() == null) {
 			throw new IllegalArgumentException("La liste est null");
@@ -145,6 +221,12 @@ public class Plateau {
 		getListeCases().add(Case);
 	}
 	
+	/**
+	 * <p>Methode qui cherche et renvoi une case de la liste de cases en fonction de la position donnée</p>
+	 * 
+	 * @param numeroCase la position de la case a chercher
+	 * @return la case a la position numeroCase de la liste de cases
+	 */
 	public Case getCase(int numeroCase) {
 		if(getListeCases() == null) {
 			throw new IllegalArgumentException("La liste est null");
@@ -155,6 +237,11 @@ public class Plateau {
 		return (Case) (getListeCases().get(numeroCase));
 	}
 	
+	/**
+	 * <p>Methode qui cherche et affiche une case de la liste de cases en fonction de la position donnée</p>
+	 * 
+	 * @param numeroCase la position de la case a chercher
+	 */
 	public void afficherUneCase(int numeroCase) {
 		if(getListeCases() == null) {
 			throw new IllegalArgumentException("La liste est null");
@@ -165,6 +252,12 @@ public class Plateau {
 		System.out.println(getCase(numeroCase).toString());
 	}
 	
+	/**
+	 * <p>Methode qui cherche la position d'une case de la liste de cases en fonction du nom donné</p>
+	 * 
+	 * @param nomCase le nom de la case a chercher
+	 * @return la position de la case trouvée ou -1 sinon
+	 */
 	public int trouverPositionCase(String nomCase) {	
 		if(getListeCases() == null) {
 			throw new IllegalArgumentException("La liste est null");
@@ -182,7 +275,11 @@ public class Plateau {
 	
 	
 	// === Fonctions de gestion des joueurs ===	
-	
+	/**
+	 * <p>Methode qui ajoute un joueur a la liste de joueurs et augemente le nombre de joueur de 1</p>
+	 * 
+	 * @param joueur le joueur a ajouter
+	 */
 	public void ajouterJoueur(Joueur joueur) {
 		if(joueur == null) {
 			throw new IllegalArgumentException("Le joueur a ajouter est null");
@@ -193,7 +290,9 @@ public class Plateau {
 	
 	
 	// === Fonctions de gestion des cartes chance ===
-	
+	/**
+	 * <p>Methode qui initialise les cartes chance en appelant le parseur du fichier les contenant</p>
+	 */
 	public void initialiserCartesChances() {
 		try {
 			Fichier.lire(nomDuFichierCartesChances, premierParserCartesChances);
@@ -203,6 +302,9 @@ public class Plateau {
 		}
 	}
 	
+	/**
+	 * <p>Methode qui affiche les cartes chance dans l'ordre de la liste de cartes chances</p>
+	 */
 	public void afficherCartesChances() {	
 		if(getListeCartesChances() == null) {
 			throw new IllegalArgumentException("La liste est null");
@@ -212,6 +314,11 @@ public class Plateau {
 		}
 	}
 	
+	/**
+	 * <p>Methode qui ajoute une carte chance a la fin de la liste de cartes chances</p>
+	 * 
+	 * @param CarteChance la carte chance a ajouter
+	 */
 	public void ajouterCarteChance(Carte CarteChance) {	
 		if(getListeCartesChances() == null) {
 			throw new IllegalArgumentException("La liste est null");
@@ -222,6 +329,14 @@ public class Plateau {
 		listeCartesChances.add(CarteChance);
 	}
 	
+	/**
+	 * <p>Methode qui met une carte chance spécifique au dessus du paquet (au debut de la liste)</p>
+	 * <p>Deux posibilités : </p>
+	 * <p> - La carte est deja dans le paquet, on la supprime et on l'ajoute au debut</p>
+	 * <p> - La carte n'est pas dans le paquet, on l'ajoute au debut</p>
+	 * 
+	 * @param CarteChance la carte chance a mettre au dessus
+	 */
 	public void MettreCarteChanceAuDessus(Carte CarteChance) {
 		if(getListeCartesChances() == null) {
 			throw new IllegalArgumentException("La liste est null");
@@ -243,6 +358,14 @@ public class Plateau {
 		}
 	}
 	
+	/**
+	 * <p>Methode qui met une carte chance spécifique a la fin du paquet (a la fin de la liste)</p>
+	 * <p>Deux posibilités : </p>
+	 * <p> - La carte est deja dans le paquet, on la supprime et on l'ajoute a la fin</p>
+	 * <p> - La carte n'est pas dans le paquet, on l'ajoute a la fin</p>
+	 * 
+	 * @param CarteChance la carte chance a mettre a la fin
+	 */
 	public void MettreCarteChanceAuFond(Carte CarteChance) {
 		if(getListeCartesChances() == null) {
 			throw new IllegalArgumentException("La liste est null");
@@ -264,6 +387,15 @@ public class Plateau {
 		}
 	}
 	
+	/**
+	 * <p>Methode qui tire la premiere carte chance du paquet</p>
+	 * <p>Deux possibilités : </p>
+	 * <p> - l'effet de la carte est immédiat, on applique l'effet sur le joueur et on remet la carte au fond du paquet</p>
+	 * <p> - l'effet de la carte n'est pas immédiat, le joueur garde la carte</p>
+	 * 
+	 * @param joueur le joueur qui tire une carte chance
+	 * @throws PartieException 
+	 */
 	public void TirerUneCarteChance(Joueur joueur) throws PartieException {
 		if(joueur == null) {
 			throw new IllegalArgumentException("Le joueur est null");
@@ -279,6 +411,12 @@ public class Plateau {
 		}	
 	}
 	
+	/**
+	 * <p>Methode qui cherche une carte chance dans la liste de cartes chance en fonction de son message</p>
+	 * 
+	 * @param message le message de la carte a trouver
+	 * @return la carte trouvée ou null sinon
+	 */
 	public Carte trouverCarteChance(String message) {	
 		if(getListeCartesChances() == null) {
 			throw new IllegalArgumentException("La liste est null");
@@ -296,7 +434,9 @@ public class Plateau {
 	
 	
 	// === Fonctions de gestion des cartes communaute ===
-	
+	/**
+	 * <p>Methode qui initialise les cartes communaute en appelant le parseur du fichier les contenant</p>
+	 */
 	public void initialiserCartesCommunaute() {
 		try {
 			Fichier.lire(nomDuFichierCartesCommunaute, premierParserCartesCommunaute);
@@ -306,6 +446,9 @@ public class Plateau {
 		}
 	}
 	
+	/**
+	 * <p>Methode qui affiche les cartes communaute dans l'ordre de la liste de cartes communaute</p>
+	 */
 	public void afficherCartesCommunaute() {	
 		if(getListeCartesCommunaute() == null) {
 			throw new IllegalArgumentException("La liste est null");
@@ -315,6 +458,11 @@ public class Plateau {
 		}
 	}
 	
+	/**
+	 * <p>Methode qui ajoute une carte communaute a la fin de la liste de cartes communaute</p>
+	 * 
+	 * @param CarteCommunaute la carte communaute a ajouter
+	 */
 	public void ajouterCarteCommunaute(Carte CarteCommunaute) {	
 		if(getListeCartesCommunaute() == null) {
 			throw new IllegalArgumentException("La liste est null");
@@ -325,6 +473,14 @@ public class Plateau {
 		listeCartesCommunaute.add(CarteCommunaute);
 	}
 	
+	/**
+	 * <p>Methode qui met une communaute chance spécifique au dessus du paquet (au debut de la liste)</p>
+	 * <p>Deux posibilités : </p>
+	 * <p> - La carte est deja dans le paquet, on la supprime et on l'ajoute au debut</p>
+	 * <p> - La carte n'est pas dans le paquet, on l'ajoute au debut</p>
+	 * 
+	 * @param CarteCommunaute la carte communaute a mettre au dessus
+	 */
 	public void MettreCarteCommunauteAuDessus(Carte CarteCommunaute) {
 		if(getListeCartesCommunaute() == null) {
 			throw new IllegalArgumentException("La liste est null");
@@ -346,6 +502,14 @@ public class Plateau {
 		}
 	}
 	
+	/**
+	 * <p>Methode qui met une carte communaute spécifique a la fin du paquet (a la fin de la liste)</p>
+	 * <p>Deux posibilités : </p>
+	 * <p> - La carte est deja dans le paquet, on la supprime et on l'ajoute a la fin</p>
+	 * <p> - La carte n'est pas dans le paquet, on l'ajoute a la fin</p>
+	 * 
+	 * @param CarteCommunaute la carte communaute a mettre a la fin
+	 */
 	public void MettreCarteCommunauteAuFond(Carte CarteCommunaute) {
 		if(getListeCartesCommunaute() == null) {
 			throw new IllegalArgumentException("La liste est null");
@@ -367,6 +531,15 @@ public class Plateau {
 		}
 	}
 	
+	/**
+	 * <p>Methode qui tire la premiere communaute chance du paquet</p>
+	 * <p>Deux possibilités : </p>
+	 * <p> - l'effet de la carte est immédiat, on applique l'effet sur le joueur et on remet la carte au fond du paquet</p>
+	 * <p> - l'effet de la carte n'est pas immédiat, le joueur garde la carte</p>
+	 * 
+	 * @param joueur le joueur qui tire une carte communaute
+	 * @throws PartieException 
+	 */
 	public void TirerUneCarteCommunaute(Joueur joueur) throws PartieException {
 		if(joueur == null) {
 			throw new IllegalArgumentException("Le joueur est null");
@@ -382,6 +555,12 @@ public class Plateau {
 		}		
 	}
 	
+	/**
+	 * <p>Methode qui cherche une carte communaute dans la liste de cartes communaute en fonction de son message</p>
+	 * 
+	 * @param message le message de la carte a trouver
+	 * @return la carte trouvée ou null sinon
+	 */
 	public Carte trouverCarteCommunaute(String message) {	
 		if(getListeCartesCommunaute() == null) {
 			throw new IllegalArgumentException("La liste est null");
@@ -399,34 +578,44 @@ public class Plateau {
 	
 	
 	// === Fonctions de gestion des coordonnees ===
+	/**
+	 * <p>Methode qui initialise les coordonnees en appelant le parseur du fichier les contenant</p>
+	 */
+	public void initialiserCoordonnees() {
+		try {
+			Fichier.lire(nomDuFichierCoordonnees, premierParserCoordonnees);
+		}
+		catch (IllegalArgumentException e) {
+			System.err.println(e.getMessage());
+		}
+	}
 	
-		public void initialiserCoordonnees() {
-			try {
-				Fichier.lire(nomDuFichierCoordonnees, premierParserCoordonnees);
-			}
-			catch (IllegalArgumentException e) {
-				System.err.println(e.getMessage());
-			}
+	/**
+	 * <p>Methode qui affiche les coordonnée dans l'ordre de la liste des coordonnées</p>
+	 */
+	public void afficherCoordonnees() {	
+		if(getListeCoordonnees() == null) {
+			throw new IllegalArgumentException("La liste est null");
 		}
-		
-		public void afficherCoordonnees() {	
-			if(getListeCoordonnees() == null) {
-				throw new IllegalArgumentException("La liste est null");
-			}
-			for(Object Coords : listeCoordonnees) {
-				System.out.println(Coords.toString());
-			}
+		for(Object Coords : listeCoordonnees) {
+			System.out.println(Coords.toString());
 		}
-		
-		public void ajouterCoordonnees(Coordonnees Coords) {	
-			if(getListeCoordonnees() == null) {
-				throw new IllegalArgumentException("La liste est null");
-			}
-			if(Coords == null) {
-				throw new IllegalArgumentException("La case a ajouter est null");
-			}
-			getListeCoordonnees().add(Coords);
+	}
+	
+	/**
+	 * <p>Methode qui ajoute une coordonnée a la fin de la liste des coordonnées</p>
+	 * 
+	 * @param Coords la coordonnée a ajouter
+	 */
+	public void ajouterCoordonnees(Coordonnees Coords) {	
+		if(getListeCoordonnees() == null) {
+			throw new IllegalArgumentException("La liste est null");
 		}
+		if(Coords == null) {
+			throw new IllegalArgumentException("La case a ajouter est null");
+		}
+		getListeCoordonnees().add(Coords);
+	}
 		
 	
 

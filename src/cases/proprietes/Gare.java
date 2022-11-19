@@ -3,6 +3,9 @@ package cases.proprietes;
 import partie.Joueur;
 import partie.exceptions.PartieException;
 
+/**
+ * La classe Gare permet de traiter les effets des proprietes de type GARE
+ */
 public class Gare extends Propriete {
 
 	public Gare(int Position, String Nom, int PrixAchat) {

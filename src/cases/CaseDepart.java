@@ -2,8 +2,14 @@ package cases;
 
 import partie.Joueur;
 
+/**
+ * La classe CaseDepart permet de traiter les effets des cases de type CASE DEPART
+ */
 public class CaseDepart extends Case {
 	
+	/**
+	 * entier qui stock l'argent que recoit un joueur apres avoir fait un tour
+	 */
 	private int gainTour; // le joueur recoit de l'argent chaque tour en passant par cette case
 	
 	public CaseDepart(int Position, int gain) {

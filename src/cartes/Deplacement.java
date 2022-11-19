@@ -4,9 +4,19 @@ import partie.Joueur;
 import partie.Plateau;
 import partie.exceptions.PartieException;
 
+/**
+ * La classe Deplacement permet de traiter les effets des cartes de type DEPLACEMENT
+ */
 public class Deplacement extends Carte {
 	
+	/**
+	 * String qui stock le nom de la case ou le joueur doit ce deplacer
+	 */
 	private String NomCase;
+	/**
+	 * entier qui stock le nombre de cases que le joueur doit reculer
+	 * Utilisé lorsque la carte demande de reculer
+	 */
 	private int reculer;
 	
 	public Deplacement(String message, String NomCase, int reculer, boolean isChance) {

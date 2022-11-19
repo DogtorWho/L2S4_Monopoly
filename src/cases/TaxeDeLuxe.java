@@ -4,8 +4,14 @@ import partie.Joueur;
 import partie.Plateau;
 import partie.exceptions.BankruptException;
 
+/**
+ * La classe TaxeDeLuxe permet de traiter les effets des cases de type TAXE DE LUXE
+ */
 public class TaxeDeLuxe extends Case {
 	
+	/**
+	 * entier qui stock la somme que le joueur devra payer
+	 */
 	private int taxe;
 	
 	public TaxeDeLuxe(int Position, int Taxe) {

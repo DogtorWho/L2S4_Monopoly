@@ -4,6 +4,9 @@ import partie.Joueur;
 import partie.Plateau;
 import partie.exceptions.PartieException;
 
+/**
+ * La classe AllerEnPrison permet de traiter les effets des cases de type ALLEZ EN PRISON
+ */
 public class AllerEnPrison extends Case {
 
 	public AllerEnPrison(int Position) {

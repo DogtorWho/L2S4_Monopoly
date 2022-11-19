@@ -3,9 +3,18 @@ package cartes;
 import partie.Joueur;
 import partie.exceptions.BankruptException;
 
+/**
+ * La classe Frais permet de traiter les effets des cartes de type FRAIS
+ */
 public class Frais extends Carte {
 	
+	/**
+	 * entier qui stock la somme d'argent que le joueur dvra payer par maison possedées
+	 */
 	int MontantM;
+	/**
+	 * entier qui stock la somme d'argent que le joueur dvra payer par hotels possedés
+	 */
 	int MontantH;
 
 	

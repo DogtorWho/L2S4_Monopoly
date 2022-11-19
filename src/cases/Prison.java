@@ -3,6 +3,9 @@ package cases;
 import partie.Joueur;
 import partie.exceptions.PartieException;
 
+/**
+ * La classe Prison permet de traiter les effets des cases de type PRISON
+ */
 public class Prison extends Case {
 	
 	public Prison(int Position) {

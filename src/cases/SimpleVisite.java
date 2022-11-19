@@ -2,6 +2,9 @@ package cases;
 
 import partie.Joueur;
 
+/**
+ * La classe SimpleVisite permet de traiter les effets des cases de type SIMPLE VISITE
+ */
 public class SimpleVisite extends Case {
 	
 	public SimpleVisite(int Position) {

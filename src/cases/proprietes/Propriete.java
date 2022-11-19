@@ -2,10 +2,22 @@ package cases.proprietes;
 
 import cases.Case;
 
+/**
+ * La classe Propriete stock toutes les données relatives a une propriete, qui est une extention de Case
+ */
 public abstract class Propriete extends Case {
 	
+	/**
+	 * String qui stock le nom de la propriete
+	 */
 	private String Nom;
+	/**
+	 * entier qui stock le prix d'une propriete
+	 */
 	private int PrixAchat;
+	/**
+	 * boolean qui est vrai quand la propriete est en hypotheque
+	 */
 	private boolean EnHypotheque;
 	
 	Propriete(int Position, String Nom, int PrixAchat) {

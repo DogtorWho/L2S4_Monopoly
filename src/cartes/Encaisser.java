@@ -2,8 +2,14 @@ package cartes;
 
 import partie.Joueur;
 
-	public class Encaisser extends Carte {
+/**
+ * La classe Encaisser permet de traiter les effets des cartes de type ENCAISSER
+ */
+public class Encaisser extends Carte {
 	
+	/**
+	 * entier qui stock la somme d'argent que le joueur va gagner
+	 */
 	int Montant;
 
 	

@@ -4,8 +4,14 @@ import cartes.Carte;
 import partie.Joueur;
 import partie.exceptions.PartieException;
 
+/**
+ * La classe PiocherChance permet de traiter les effets des cartes de type CHANCE
+ */
 public class PiocherChance extends Carte{
-
+	
+	/**
+	 * entier qui stock la somme d'argent que le joueur devra payer
+	 */
 	int Montant;
 	
 	public PiocherChance(String message, int montant, boolean isChance) {

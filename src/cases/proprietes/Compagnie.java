@@ -4,6 +4,9 @@ import partie.Des;
 import partie.Joueur;
 import partie.exceptions.PartieException;
 
+/**
+ * La classe Compagnie permet de traiter les effets des proprietes de type COMPAGNIE
+ */
 public class Compagnie extends Propriete {
 
 	public Compagnie(int Position, String Nom, int PrixAchat) {

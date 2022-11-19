@@ -4,6 +4,9 @@ import partie.Joueur;
 import partie.Plateau;
 import partie.exceptions.PartieException;
 
+/**
+ * La classe CaisseCommunaute permet de traiter les effets des cases de type CAISSE COMMUNAUTE
+ */
 public class CaisseCommunaute extends Case {
 
 	public CaisseCommunaute(int Position) {

@@ -3,8 +3,14 @@ package cartes;
 import partie.Joueur;
 import partie.exceptions.BankruptException;
 
+/**
+ * La classe Payer permet de traiter les effets des cartes de type PAYER
+ */
 public class Payer extends Carte {
 	
+	/**
+	 * entier qui stock la somme d'argent que le joueur devra payer
+	 */
 	int Montant;
 
 	

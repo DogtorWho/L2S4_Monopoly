@@ -4,6 +4,9 @@ import partie.Joueur;
 import partie.Plateau;
 import partie.exceptions.PartieException;
 
+/**
+ * La classe Chance permet de traiter les effets des cases de type CHANCE
+ */
 public class Chance extends Case {
 
 	public Chance(int Position) {

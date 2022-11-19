@@ -3,16 +3,46 @@ package cases.proprietes;
 import partie.Joueur;
 import partie.exceptions.PartieException;
 
+/**
+ * La classe TerrainConstructible permet de traiter les effets des proprietes de type TERRAIN CONSTRUCTIBLE
+ */
 public class TerrainConstructible extends Propriete {
 
+	/**
+	 * String qui stock la couleur de la propriete
+	 */
 	private String Couleur;
+	/**
+	 * entier qui stock le nombre de maisons sur le terrain
+	 */
 	private int NombreMaison;
+	/**
+	 * entier qui stock le prix d'une maison sur le terrain
+	 */
 	private int PrixMaison;
+	/**
+	 * entier qui stock le prix du loyer si le terrain n'a pas de maisons
+	 */
 	private int TerrainNu;
+	/**
+	 * entier qui stock le prix du loyer si le terrain a 1 maison
+	 */
 	private int UneMaison;
+	/**
+	 * entier qui stock le prix du loyer si le terrain a 2 maisons
+	 */
 	private int DeuxMaisons;
+	/**
+	 * entier qui stock le prix du loyer si le terrain a 3 maisons
+	 */
 	private int TroisMaisons;
+	/**
+	 * entier qui stock le prix du loyer si le terrain a 4 maisons
+	 */
 	private int QuatreMaisons;
+	/**
+	 * entier qui stock le prix du loyer si le terrain a 1 hotel (5 maisons)
+	 */
 	private int UnHotel;
 	
 	public TerrainConstructible(int Position, String Nom, int PrixAchat, String Couleur, int PrixMaison,

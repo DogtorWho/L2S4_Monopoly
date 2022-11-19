@@ -3,6 +3,9 @@ package cartes;
 import partie.Joueur;
 import partie.Plateau;
 
+/**
+ * La classe Liberation permet de traiter les effets des cartes de type LIBERATION
+ */
 public class Liberation extends Carte {
 	
 	public Liberation(String message, boolean isChance) {

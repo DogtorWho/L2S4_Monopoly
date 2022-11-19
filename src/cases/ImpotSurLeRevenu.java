@@ -4,9 +4,15 @@ import partie.Joueur;
 import partie.Plateau;
 import partie.exceptions.BankruptException;
 
+/**
+ * La classe ImpotSurLeRevenu permet de traiter les effets des cases de type IMPOT SUR LE REVENU
+ */
 public class ImpotSurLeRevenu extends Case {
 
-private int impot;
+	/**
+	 * entier qui stock la somme que le joueur devra payer
+	 */
+	private int impot;
 	
 	public ImpotSurLeRevenu(int Position, int Impot) {
 		super(Position);

@@ -5,8 +5,14 @@ import partie.Joueur;
 import partie.Plateau;
 import partie.exceptions.BankruptException;
 
+/**
+ * La classe Anniversaire permet de traiter les effets des cartes de type ANNIVERSAIRE
+ */
 public class Anniversaire extends Carte{
 
+	/**
+	 * entier qui stock la somme d'argent que les joueurs devront payer au joueur qui tire la carte
+	 */
 	int Montant;
 	
 	public Anniversaire(String message, int Montant, boolean isChance) {

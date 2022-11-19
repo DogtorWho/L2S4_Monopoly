@@ -13,6 +13,9 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import partie.Plateau;
 
+/**
+ * La classe Controller_FinDePartie sert à controller la fenetre JavaFx de la fin de partie
+ */
 public class Controller_FinDePartie {
 	
 	@FXML private Label _gagnant;

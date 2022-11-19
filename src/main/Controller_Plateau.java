@@ -29,10 +29,22 @@ import partie.Plateau;
 import partie.exceptions.BankruptException;
 import partie.exceptions.PartieException;
 
+/**
+ * La classe Controller_Plateau sert à controller la fenetre JavaFx du plateau de jeu
+ */
 public class Controller_Plateau {
 
+	/**
+	 * ArrayList<Image> qui stock les images des pions de chaques joueurs
+	 */
 	private ArrayList<Image> PionsJoueurs = new ArrayList<Image>();
+	/**
+	 * ArrayList<ImageView> qui stock les images des pions de chaques joueurs
+	 */
 	private ArrayList<ImageView> AffichagePions = new ArrayList<ImageView>();
+	/**
+	 * Joueur qui stock le joueur qui joue son tour
+	 */
 	private Joueur joueurActif;
 
 	@FXML private Label _msgGeneral;

@@ -26,17 +26,40 @@ import javafx.stage.Stage;
 import partie.Joueur;
 import partie.Plateau;
 
-
+/**
+ * La classe Controller_Accueil sert à controller la fenetre JavaFx de l'accueil du jeu
+ */
 public class Controller_Accueil {
 	
+	/**
+	 * entier qui stock le nombre de joueurs dans la partie (max 4)
+	 */
 	private int nbJoueurs = 2;
+	/**
+	 * String qui stock le nom du pion choisit par le joueur 1
+	 */
 	private String Pion_1 = null;
+	/**
+	 * String qui stock le nom du pion choisit par le joueur 2
+	 */
 	private String Pion_2 = null;
+	/**
+	 * String qui stock le nom du pion choisit par le joueur 3
+	 */
 	private String Pion_3 = null;
+	/**
+	 * String qui stock le nom du pion choisit par le joueur 4
+	 */
 	private String Pion_4 = null;
 	
+	/**
+	 * ArrayList<Image> qui stock les images de tous les pions qui existent
+	 */
 	private ArrayList<Image> PionsJoueurs = new ArrayList<Image>();
 	
+	/**
+	 * ObservableList<String> qui stock le nom de tous les pions qui existent
+	 */
 	ObservableList<String> listePions = FXCollections.observableArrayList("Bateau", "Brouette", "Chapeau"
 			, "Chat", "Chaussure", "Chien", "DeACoudre", "Voiture");
 	

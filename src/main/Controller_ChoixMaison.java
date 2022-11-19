@@ -20,11 +20,18 @@ import partie.Joueur;
 import partie.Plateau;
 import partie.exceptions.PartieException;
 
-
+/**
+ * La classe Controller_ChoixMaison sert à controller la fenetre JavaFx du choix de la case où mettre une maison
+ */
 public class Controller_ChoixMaison {
 	
+	/**
+	 * Joueur qui stock le joueur qui joue son tour
+	 */
 	private Joueur joueurActif;
-	
+	/**
+	 * ObservableList<String> qui stock le nom de toutes les maisons du joueur actif
+	 */
 	ObservableList<String> listeMaisonPossedees = FXCollections.observableArrayList();
 	
 	@FXML private ChoiceBox<String> _liste;

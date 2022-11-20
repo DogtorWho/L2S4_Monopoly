@@ -4,6 +4,9 @@ import cartes.Deplacement;
 import partie.Plateau;
 import partie.parser.Parser;
 
+/**
+ * La classe ParserDeplacementCommunaute permet de parser les cartes communautés qui deplacent le joueur
+ */
 public class ParserDeplacementCommunaute extends Parser {
 
 	public ParserDeplacementCommunaute(Parser suivant) {

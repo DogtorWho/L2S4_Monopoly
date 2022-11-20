@@ -4,6 +4,9 @@ import cases.SimpleVisite;
 import partie.Plateau;
 import partie.parser.Parser;
 
+/**
+ * La classe ParserSimpleVisite permet de parser la case de visiteur dans la prison
+ */
 public class ParserSimpleVisite extends Parser {
 
 	public ParserSimpleVisite(Parser suivant) {

@@ -4,6 +4,9 @@ import cartes.communautes.PiocherChance;
 import partie.Plateau;
 import partie.parser.Parser;
 
+/**
+ * La classe ParserPiocherChanceCommunaute permet de parser les cartes communautés qui donne une carte chance au joueur
+ */
 public class ParserPiocherChanceCommunaute extends Parser{
 	public ParserPiocherChanceCommunaute(Parser suivant) {
 		super(suivant);

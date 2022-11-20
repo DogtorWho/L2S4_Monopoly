@@ -4,6 +4,9 @@ import cases.Prison;
 import partie.Plateau;
 import partie.parser.Parser;
 
+/**
+ * La classe ParserPrison permet de parser la case de prison
+ */
 public class ParserPrison extends Parser {
 
 	public ParserPrison(Parser suivant) {

@@ -3,9 +3,6 @@ package partie;
 /**
  * La classe Coordonnees permet de stocker les coordonnées X et Y d'une case du Plateau, en fonction de sa position
  * Cette classe est utile dans l'UI pour afficher les pions des joueurs
- * 
- * @author doctorwho
- *
  */
 public class Coordonnees {
 	

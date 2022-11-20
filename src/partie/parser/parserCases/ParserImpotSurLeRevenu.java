@@ -4,6 +4,9 @@ import cases.ImpotSurLeRevenu;
 import partie.Plateau;
 import partie.parser.Parser;
 
+/**
+ * La classe ParserImpotSurLeRevenu permet de parser les cases d'impot sur le revenu
+ */
 public class ParserImpotSurLeRevenu extends Parser {
 
 	public ParserImpotSurLeRevenu(Parser suivant) {

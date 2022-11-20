@@ -4,6 +4,9 @@ import cartes.Encaisser;
 import partie.Plateau;
 import partie.parser.Parser;
 
+/**
+ * La classe ParserEncaisserCommunaute permet de parser les cartes communautés qui donne de l'argent au joueur
+ */
 public class ParserEncaisserCommunaute extends Parser {
 	public ParserEncaisserCommunaute(Parser suivant) {
 		super(suivant);

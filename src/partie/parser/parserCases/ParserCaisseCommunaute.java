@@ -4,6 +4,9 @@ import cases.CaisseCommunaute;
 import partie.Plateau;
 import partie.parser.Parser;
 
+/**
+ * La classe ParserCaisseCommunaute permet de parser la case qui donne une carte communauté au joueur
+ */
 public class ParserCaisseCommunaute extends Parser {
 
 	public ParserCaisseCommunaute(Parser suivant) {

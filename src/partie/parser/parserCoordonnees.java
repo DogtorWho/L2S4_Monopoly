@@ -3,6 +3,9 @@ package partie.parser;
 import partie.Coordonnees;
 import partie.Plateau;
 
+/**
+ * La classe parserCoordonnees permet de parser les coordonnées des cases du jeu
+ */
 public class parserCoordonnees extends Parser {
 
 	public parserCoordonnees(Parser suivant) {

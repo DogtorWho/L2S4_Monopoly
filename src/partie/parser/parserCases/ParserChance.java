@@ -4,6 +4,9 @@ import cases.Chance;
 import partie.Plateau;
 import partie.parser.Parser;
 
+/**
+ * La classe ParserChance permet de parser la case qui donne une carte chance au joueur
+ */
 public class ParserChance extends Parser {
 
 	public ParserChance(Parser suivant) {

@@ -4,6 +4,9 @@ import cases.proprietes.Compagnie;
 import partie.Plateau;
 import partie.parser.Parser;
 
+/**
+ * La classe ParserCompagnie permet de parser les cases de compagnies
+ */
 public class ParserCompagnie extends Parser {
 
 	public ParserCompagnie(Parser suivant) {

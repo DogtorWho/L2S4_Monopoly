@@ -4,6 +4,9 @@ import cartes.Frais;
 import partie.Plateau;
 import partie.parser.Parser;
 
+/**
+ * La classe ParserFraisChance permet de parser les cartes chances qui retire de l'argent au joueur
+ */
 public class ParserFraisChance extends Parser {
 	
 	public ParserFraisChance(Parser suivant) {

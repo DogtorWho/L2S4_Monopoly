@@ -4,6 +4,9 @@ import cartes.communautes.Anniversaire;
 import partie.Plateau;
 import partie.parser.Parser;
 
+/**
+ * La classe ParserAnniversaireCommunaute permet de parser les cartes communautés qui donne de l'argent au joueur pour son anniversaire
+ */
 public class ParserAnniversaireCommunaute extends Parser {
 
 	public ParserAnniversaireCommunaute(Parser suivant) {

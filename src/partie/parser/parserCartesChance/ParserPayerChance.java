@@ -4,6 +4,9 @@ import cartes.Payer;
 import partie.Plateau;
 import partie.parser.Parser;
 
+/**
+ * La classe ParserPayerChance permet de parser les cartes chances qui retire de l'argent au joueur
+ */
 public class ParserPayerChance extends Parser {
 	
 	public ParserPayerChance(Parser suivant) {

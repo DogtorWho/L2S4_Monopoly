@@ -14,9 +14,6 @@ import cases.CaseDepart;
 
 /**
  * La classe Joueur stock toutes les données relatives a un joueur, qui sera ensuite ajouter a la liste des joueurs du plateau
- * 
- * @author doctorwho
- *
  */
 public class Joueur {
 

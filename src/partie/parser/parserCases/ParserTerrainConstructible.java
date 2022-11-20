@@ -4,6 +4,9 @@ import cases.proprietes.TerrainConstructible;
 import partie.Plateau;
 import partie.parser.Parser;
 
+/**
+ * La classe ParserTerrainConstructible permet de parser les cases ou l'on peut contruire des maisons (les terrains de couleurs)
+ */
 public class ParserTerrainConstructible extends Parser {
 
 	public ParserTerrainConstructible(Parser suivant) {

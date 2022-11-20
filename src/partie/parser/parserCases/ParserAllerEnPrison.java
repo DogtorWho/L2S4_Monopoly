@@ -4,6 +4,9 @@ import cases.AllerEnPrison;
 import partie.Plateau;
 import partie.parser.Parser;
 
+/**
+ * La classe ParserAllerEnPrison permet de parser la case qui emmenent le joueur en prison
+ */
 public class ParserAllerEnPrison extends Parser {
 
 	public ParserAllerEnPrison(Parser suivant) {

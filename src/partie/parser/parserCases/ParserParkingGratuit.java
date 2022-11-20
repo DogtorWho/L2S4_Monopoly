@@ -4,6 +4,9 @@ import cases.ParkingGratuit;
 import partie.Plateau;
 import partie.parser.Parser;
 
+/**
+ * La classe ParserParkingGratuit permet de parser la case du parking gratuit
+ */
 public class ParserParkingGratuit extends Parser {
 
 	public ParserParkingGratuit(Parser suivant) {

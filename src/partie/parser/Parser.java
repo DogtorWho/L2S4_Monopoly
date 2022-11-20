@@ -2,6 +2,9 @@ package partie.parser;
 
 import partie.fichiers.ParserManquantException;
 
+/**
+ * La classe abstraite Parser permet de parser les cases et les cartes du jeu
+ */
 public abstract class Parser {
 	
 	// Un parser est en fait un maillon dans une liste chainée...

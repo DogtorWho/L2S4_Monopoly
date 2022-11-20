@@ -4,6 +4,9 @@ import cartes.Frais;
 import partie.Plateau;
 import partie.parser.Parser;
 
+/**
+ * La classe ParserFraisCommunaute permet de parser les cartes communautés qui retire de l'argent au joueur
+ */
 public class ParserFraisCommunaute extends Parser {
 	
 	public ParserFraisCommunaute(Parser suivant) {

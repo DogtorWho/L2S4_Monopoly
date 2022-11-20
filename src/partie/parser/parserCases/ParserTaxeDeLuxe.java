@@ -4,6 +4,9 @@ import cases.TaxeDeLuxe;
 import partie.Plateau;
 import partie.parser.Parser;
 
+/**
+ * La classe ParserTaxeDeLuxe permet de parser la case de taxe de luxe
+ */
 public class ParserTaxeDeLuxe extends Parser {
 
 	public ParserTaxeDeLuxe(Parser suivant) {

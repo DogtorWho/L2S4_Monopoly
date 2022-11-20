@@ -4,6 +4,9 @@ import cartes.Liberation;
 import partie.Plateau;
 import partie.parser.Parser;
 
+/**
+ * La classe ParserLiberationCommunaute permet de parser les cartes communautés qui permettent au joueur de sortir de prison
+ */
 public class ParserLiberationCommunaute extends Parser {
 
 	public ParserLiberationCommunaute(Parser suivant) {

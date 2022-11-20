@@ -4,6 +4,9 @@ import cases.proprietes.Gare;
 import partie.Plateau;
 import partie.parser.Parser;
 
+/**
+ * La classe ParserGare permet de parser les cases de gares
+ */
 public class ParserGare extends Parser {
 
 	public ParserGare(Parser suivant) {

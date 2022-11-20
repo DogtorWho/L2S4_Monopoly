@@ -4,6 +4,9 @@ import cartes.Payer;
 import partie.Plateau;
 import partie.parser.Parser;
 
+/**
+ * La classe ParserPayerCommunaute permet de parser les cartes communautés qui retire de l'argent au joueur
+ */
 public class ParserPayerCommunaute extends Parser {
 	
 	public ParserPayerCommunaute(Parser suivant) {

@@ -4,6 +4,9 @@ import cartes.Deplacement;
 import partie.Plateau;
 import partie.parser.Parser;
 
+/**
+ * La classe ParserDeplacementChance permet de parser les cartes chances qui deplacent le joueur
+ */
 public class ParserDeplacementChance extends Parser {
 
 	public ParserDeplacementChance(Parser suivant) {

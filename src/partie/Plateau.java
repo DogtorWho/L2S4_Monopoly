@@ -37,9 +37,6 @@ import partie.parser.parserCases.ParserTerrainConstructible;
 /**
  * La classe Plateau gère le plateau du Monopoly : cases, cartes chances et communaute, joueurs,...
  * On utilise un type Singleton pour avoir access aux plateau dans toutes les autres classes
- * 
- * @author doctorwho
- *
  */
 public class Plateau {
 	

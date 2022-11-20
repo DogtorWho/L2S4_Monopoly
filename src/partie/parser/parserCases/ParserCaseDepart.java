@@ -4,6 +4,9 @@ import cases.CaseDepart;
 import partie.Plateau;
 import partie.parser.Parser;
 
+/**
+ * La classe ParserCaseDepart permet de parser la case de départ
+ */
 public class ParserCaseDepart extends Parser {
 
 	public ParserCaseDepart(Parser suivant) {

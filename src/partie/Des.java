@@ -5,37 +5,29 @@ import java.util.Random;
 /**
  * La classe Des gère le lancé des 2 dés du Monopoly
  * On utilise un type Singleton pour avoir access aux dès dans toutes les autres classes
- * 
- * @author doctorwho
- *
  */
 public class Des {
 	
 	/**
 	 * instance du Singleton Des
 	 */
-	private static Des instance = null;
-	
+	private static Des instance = null;	
 	/**
 	 * entier qui stock la somme des 2 dés lancés
 	 */
-	private int Somme;
-	
+	private int Somme;	
 	/**
 	 * entier qui stock la valeur du dés 1 lancé
 	 */
 	private int Des1;
-	
 	/**
 	 * entier qui stock la valeur du dés 2 lancé
 	 */
-	private int Des2;
-	
+	private int Des2;	
 	/**
 	 * boolean qui est vrai quand la valeur des 2 dés sont identiques
 	 */
 	private boolean Double;
-	
 	/**
 	 * nombre aléatoire qui varie entre 1 et 6
 	 */

@@ -4,6 +4,9 @@ import cartes.Encaisser;
 import partie.Plateau;
 import partie.parser.Parser;
 
+/**
+ * La classe ParserEncaisserChance permet de parser les cartes chances qui donne de l'argent au joueur
+ */
 public class ParserEncaisserChance extends Parser {
 	
 	public ParserEncaisserChance(Parser suivant) {

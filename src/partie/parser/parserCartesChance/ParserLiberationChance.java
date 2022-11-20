@@ -4,6 +4,9 @@ import cartes.Liberation;
 import partie.Plateau;
 import partie.parser.Parser;
 
+/**
+ * La classe ParserLiberationChance permet de parser les cartes chances qui permettent au joueur de sortir de prison
+ */
 public class ParserLiberationChance extends Parser {
 
 	public ParserLiberationChance(Parser suivant) {

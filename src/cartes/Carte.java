@@ -4,7 +4,7 @@ import partie.Joueur;
 import partie.exceptions.PartieException;
 
 /**
- * La classe Carte stock toutes les données relatives a une carte, qui sera ensuite ajouter a la liste des cartes du plateau
+ * La classe Carte stock toutes les données relatives à une carte, qui sera ensuite ajouté à la liste des cartes du plateau
  */
 public abstract class Carte {
 	

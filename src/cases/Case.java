@@ -4,7 +4,7 @@ import partie.Joueur;
 import partie.exceptions.PartieException;
 
 /**
- * La classe Case stock toutes les données relatives a une case, qui sera ensuite ajouté à la liste des cases du plateau
+ * La classe Case stock toutes les données relatives à une case, qui sera ensuite ajouté à la liste des cases du plateau
  */
 public abstract class Case {
 	
